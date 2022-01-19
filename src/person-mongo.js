@@ -26,6 +26,7 @@ const personSchema = new mongoose.Schema({
     agreePercent: Number,
   },
   essays: { type: Map, of: String },
+  creationTime: {type: Date, default: Date.now()},
 });
 
 const Person = mongoose.model("Person", personSchema, "profiles");
