@@ -3,10 +3,11 @@ const selectors = require("../selectors");
 async function fetchPersonInfo(page) {
   return await page.evaluate((selectors) => {
     const detailsNodeList = document.querySelectorAll(selectors.detailsSection);
-    const details = Array.from(detailsNodeList).map((detail) => ({
-      title: detail.parentElement.className.split("--")[1],
-      content: detail.textContent,
-    }));
+    const details = {};
+    Array.from(detailsNodeList).forEach((detail) => {
+      details[detail.parentElement.className.split("--")[1]] =
+        detail.textContent;
+    });
     const photos = Array.from(document.querySelectorAll(selectors.photos))
       .filter((e) => e.closest(".dt-desktop-photos"))
       .map((p) => p.style.backgroundImage.split('"')[1]);
@@ -39,12 +40,12 @@ async function fetchPersonInfo(page) {
       answered: agree + disagree + findOut,
       agreePercent: parseInt((agree / (agree + disagree)).toFixed(2).slice(2)),
     };
-    const essays = Array.from(document.querySelectorAll(".dt-essay-section"))
+    const essays = {};
+    Array.from(document.querySelectorAll(".dt-essay-section"))
       .map((i) => i.children)
-      .map(([title, content]) => ({
-        title: title.textContent,
-        content: content.firstChild.firstChild.textContent,
-      }));
+      .forEach(([title, content]) => {
+        essays[title.textContent] = content.firstChild.firstChild.textContent;
+      });
     return {
       id,
       name,
