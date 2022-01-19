@@ -18,8 +18,8 @@ async function fetchPersonInfo(page) {
       .split(" • ");
     const age = parseInt(ageString);
     const splitLocationString = locationString.split(", ");
-    const city = splitLocationString.slice(0, -1).join(", ");
-    const country = splitLocationString[splitLocationString.length - 1];
+    const city = splitLocationString.length > 1 ? splitLocationString.slice(0, -1).join(", ") : splitLocationString[0];
+    const country = splitLocationString.length > 1 ? splitLocationString[splitLocationString.length - 1] : "Romania";
     const matchPercentDOM = document.querySelector(
       selectors.matchPercent
     ).parentElement;

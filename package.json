@@ -9,6 +9,7 @@
     "@fetched/*": "./fetched-profiles/*"
   },
   "dependencies": {
+    "mongoose": "^6.1.7",
     "puppeteer": "^13.1.1"
   },
   "scripts": {
@@ -28,6 +29,5 @@
   "bugs": {
     "url": "https://github.com/elmaester/okcupid-scraping/issues"
   },
-  "homepage": "https://github.com/elmaester/okcupid-scraping#readme",
-  "devDependencies": {}
+  "homepage": "https://github.com/elmaester/okcupid-scraping#readme"
 }

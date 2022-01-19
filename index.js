@@ -4,7 +4,7 @@ const url = "https://www.okcupid.com/home";
 const selectors = require("./src/selectors");
 const autoScroll = require("./src/functions/autoScroll");
 const fetchPersonInfo = require("./src/functions/fetchPersonInfo");
-const savePersonAsJSON = require("./src/functions/savePersonAsJSON");
+const savePersonToMongo = require("./src/functions/savePersonToMongo");
 
 const main = async () => {
   try {
@@ -18,11 +18,16 @@ const main = async () => {
     await page.setCookie(...cookies);
     await page.goto(url);
     await page.waitForSelector(selectors.matchByPercentButton);
+    await page.evaluate(() => {
+      const modalCloseButton = document.querySelector(".reader-text");
+      if (modalCloseButton) modalCloseButton.click();
+    });
+    await page.waitForSelector(selectors.matchByPercentButton);
     await page.click(selectors.matchByPercentButton);
     await autoScroll(page);
     await page.waitForSelector(selectors.questions);
     const person = await fetchPersonInfo(page);
-    savePersonAsJSON(person);
+    savePersonToMongo(person);
   } catch (e) {
     console.error(e);
   }
