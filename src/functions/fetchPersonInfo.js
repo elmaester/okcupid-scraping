@@ -18,8 +18,14 @@ async function fetchPersonInfo(page) {
       .split(" • ");
     const age = parseInt(ageString);
     const splitLocationString = locationString.split(", ");
-    const city = splitLocationString.length > 1 ? splitLocationString.slice(0, -1).join(", ") : splitLocationString[0];
-    const country = splitLocationString.length > 1 ? splitLocationString[splitLocationString.length - 1] : "Romania";
+    const city =
+      splitLocationString.length > 1
+        ? splitLocationString.slice(0, -1).join(", ")
+        : splitLocationString[0];
+    const country =
+      splitLocationString.length > 1
+        ? splitLocationString[splitLocationString.length - 1]
+        : "Romania";
     const matchPercentDOM = document.querySelector(
       selectors.matchPercent
     ).parentElement;
@@ -44,7 +50,8 @@ async function fetchPersonInfo(page) {
     Array.from(document.querySelectorAll(".dt-essay-section"))
       .map((i) => i.children)
       .forEach(([title, content]) => {
-        essays[title.textContent] = content.firstChild.firstChild.textContent;
+        essays[title.textContent.replace("...", ":").replace(".", ";")] =
+          content.firstChild.firstChild.textContent;
       });
     return {
       id,

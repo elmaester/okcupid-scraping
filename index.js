@@ -5,6 +5,7 @@ const selectors = require("./src/selectors");
 const autoScroll = require("./src/functions/autoScroll");
 const fetchPersonInfo = require("./src/functions/fetchPersonInfo");
 const savePersonToMongo = require("./src/functions/savePersonToMongo");
+const doFetchAndPass = require("./src/functions/doFetchAndPass");
 
 const main = async () => {
   try {
@@ -28,6 +29,10 @@ const main = async () => {
     await page.waitForSelector(selectors.questions);
     const person = await fetchPersonInfo(page);
     savePersonToMongo(person);
+    for (let i = 0; i < 20; i++) {
+      await doFetchAndPass(page);
+      await page.waitForTimeout(parseInt(Math.random() * 2000));
+    }
   } catch (e) {
     console.error(e);
   }
