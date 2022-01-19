@@ -1,0 +1,33 @@
+{
+  "name": "okcupid",
+  "version": "1.0.0",
+  "description": "scraping okcupid profiles for personal use",
+  "main": "index.js",
+  "imports": {
+    "@/*": "./*",
+    "@functions/*": "./src/functions/*",
+    "@fetched/*": "./fetched-profiles/*"
+  },
+  "dependencies": {
+    "puppeteer": "^13.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elmaester/okcupid-scraping.git"
+  },
+  "keywords": [
+    "scraping",
+    "okcupid",
+    "puppeteer"
+  ],
+  "author": "elmaester",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elmaester/okcupid-scraping/issues"
+  },
+  "homepage": "https://github.com/elmaester/okcupid-scraping#readme",
+  "devDependencies": {}
+}
