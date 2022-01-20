@@ -50,7 +50,7 @@ async function fetchPersonInfo(page) {
     Array.from(document.querySelectorAll(".dt-essay-section"))
       .map((i) => i.children)
       .forEach(([title, content]) => {
-        essays[title.textContent.replace("...", ":").replace(".", ";")] =
+        essays[title.textContent.replace("...", "").replace(".", ";")] =
           content.firstChild.firstChild.textContent;
       });
     return {

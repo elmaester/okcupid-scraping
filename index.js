@@ -29,12 +29,13 @@ const main = async () => {
     await page.waitForSelector(selectors.questions);
     const person = await fetchPersonInfo(page);
     savePersonToMongo(person);
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 100; i++) {
       await doFetchAndPass(page);
-      await page.waitForTimeout(parseInt(Math.random() * 2000));
+      await page.waitForTimeout(parseInt(Math.random() * 3500));
     }
+    await browser.close();
   } catch (e) {
-    console.error(e);
+    console.log(e);
   }
 };
 

@@ -8,6 +8,7 @@ async function doFetchAndPass(page) {
   await autoScroll(page);
   await page.waitForSelector(selectors.questions);
   const person = await fetchPersonInfo(page);
+  console.log(person);
   savePersonToMongo(person);
 }
 
