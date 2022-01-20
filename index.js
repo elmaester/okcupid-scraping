@@ -6,6 +6,7 @@ const autoScroll = require("./src/functions/autoScroll");
 const fetchPersonInfo = require("./src/functions/fetchPersonInfo");
 const savePersonToMongo = require("./src/functions/savePersonToMongo");
 const doFetchAndPass = require("./src/functions/doFetchAndPass");
+const playAlert = require("./src/functions/playAlert");
 
 const main = async () => {
   try {
@@ -19,22 +20,23 @@ const main = async () => {
     await page.setCookie(...cookies);
     await page.goto(url);
     await page.waitForSelector(selectors.matchByPercentButton);
-    await page.evaluate(() => {
-      const modalCloseButton = document.querySelector(".reader-text");
-      if (modalCloseButton) modalCloseButton.click();
-    });
-    await page.waitForSelector(selectors.matchByPercentButton);
+    // await page.evaluate(() => {
+    //   const modalCloseButton = document.querySelector(".reader-text");
+    //   if (modalCloseButton) modalCloseButton.click();
+    // });
+    // await page.waitForSelector(selectors.matchByPercentButton);
     await page.click(selectors.matchByPercentButton);
     await autoScroll(page);
     await page.waitForSelector(selectors.questions);
     const person = await fetchPersonInfo(page);
     savePersonToMongo(person);
-    for (let i = 0; i < 100; i++) {
+    // for (let i = 0; i < 5; i++) {
+    while (true) {
       await doFetchAndPass(page);
-      await page.waitForTimeout(parseInt(Math.random() * 3500));
     }
-    await browser.close();
+    // await browser.close();
   } catch (e) {
+    playAlert("./girl-hey-ringtone.mp3");
     console.log(e);
   }
 };
