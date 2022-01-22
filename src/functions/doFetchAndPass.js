@@ -9,7 +9,7 @@ async function doFetchAndPass(page) {
     await page.click(selectors.passButton);
     await autoScroll(page);
     await page.waitForSelector(`${selectors.questions} span`);
-    await page.waitForTimeout(parseInt(Math.random() * 1500) + 1000);
+    await page.waitForTimeout(parseInt(Math.random() * 1500) + 1500);
     const person = await fetchPersonInfo(page);
     savePersonToMongo(person);
   } catch (e) {
