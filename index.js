@@ -19,19 +19,19 @@ const main = async () => {
     });
     await page.setCookie(...cookies);
     await page.goto(url);
-    await page.waitForSelector(selectors.onlineNowButton);
+    await page.waitForSelector(selectors.matchByProximityButton);
     await page.evaluate(() => {
       const modalCloseButton = document.querySelector(".reader-text");
       if (modalCloseButton) modalCloseButton.click();
     });
-    await page.waitForSelector(selectors.onlineNowButton);
-    await page.click(selectors.onlineNowButton);
-    await autoScroll(page);
+    await page.waitForSelector(selectors.matchByProximityButton);
+    await page.click(selectors.matchByProximityButton);
+    await autoScroll(page, 100);
     await page.waitForSelector(selectors.questions);
     const person = await fetchPersonInfo(page);
     savePersonToMongo(person);
-    // for (let i = 0; i < 5; i++) {
-    while (true) {
+    for (let i = 0; i < 11; i++) {
+    // while (true) {
       await doFetchAndPass(page);
     }
     // await browser.close();

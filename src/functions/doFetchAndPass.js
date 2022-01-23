@@ -7,7 +7,7 @@ const savePersonToMongo = require("./savePersonToMongo");
 async function doFetchAndPass(page) {
   try {
     await page.click(selectors.passButton);
-    await autoScroll(page);
+    await autoScroll(page, 100);
     await page.waitForSelector(`${selectors.questions} span`);
     await page.waitForTimeout(parseInt(Math.random() * 1500) + 1500);
     const person = await fetchPersonInfo(page);

@@ -1,11 +1,10 @@
 const playAlert = require("./playAlert");
 
-async function autoScroll(page) {
+async function autoScroll(page, step) {
   try {
-    await page.evaluate(async () => {
+    await page.evaluate(async (distance) => {
       await new Promise((resolve, reject) => {
         var totalHeight = 0;
-        var distance = 100;
         var timer = setInterval(() => {
           var scrollHeight = document.body.scrollHeight;
           window.scrollBy(0, distance);
@@ -17,7 +16,7 @@ async function autoScroll(page) {
           }
         }, 100);
       });
-    });
+    }, step);
   } catch (e) {
     console.log(e);
     playAlert("./girl-hey-ringtone.mp3");
